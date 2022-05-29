@@ -1,0 +1,7 @@
+Comparable and Comparator both are used for Sorting the custom Object
+
+Comparable use for sorting a custom object by using only one field . Here we override the compareTo() method for sorting logic.
+Example: for example see CustomSorting.java class
+
+Comparator use for sorting a custom object by using many  field . Here we override the compare() method for sorting logic.
+Example: for example see CustomSorting2.java class    or  package Example: Example1.java
