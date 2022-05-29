@@ -1,0 +1,18 @@
+{
+  "Instances": {
+    "Schema-1": {},
+    "Schema-2": {},
+    "Schema-3": {
+      "Table-2": [
+        "Column-4",
+        "Column-5",
+        "Column-6"
+      ],
+      "Table-1": [
+        "Column-1",
+        "Column-2",
+        "Column-3"
+      ]
+    }
+  }
+}

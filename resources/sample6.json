@@ -1,0 +1,15 @@
+{
+  "firstname": "john",
+  "lastname": "smith",
+  "address":[
+    {
+      "city": "Howrah",
+      "pinCode": 711317
+    },
+    {
+      "city": "Kolkata",
+      "pinCode": 711109
+    }
+
+  ]
+}

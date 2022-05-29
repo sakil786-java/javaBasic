@@ -1,0 +1,19 @@
+{
+  "firstname": "john",
+  "lastname": "smith",
+  "age": 26,
+  "address": {
+    "city": "Howrah",
+    "pinCode": 711317
+  },
+  "phoneNumbers": [
+    {
+      "type": "Mobile",
+      "number": 70035788
+    },
+    {
+      "type": "LandLine",
+      "number": 565425474
+    }
+  ]
+}

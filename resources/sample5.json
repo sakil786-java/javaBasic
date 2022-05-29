@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1212,
+    "isActive": true,
+    "balance": 1742.58,
+    "age": 34,
+    "name": "Sakil",
+    "Adress": "Kolkata,Howrah",
+    "tags": [
+      "elusmod",
+      "venlam",
+      "magna"
+    ],
+    "friends": [
+      {
+        "id": 1,
+        "name": "Lula"
+      },
+      {
+        "id": 3,
+        "name": "rachel"
+      }
+    ],
+    "favoriteFood": "banana"
+  },
+  {
+    "id": 1213,
+    "isActive": true,
+    "balance": 1354.58,
+    "age": 28,
+    "name": "Vaik",
+    "Adress": "Mumbai,Howrah",
+    "tags": [
+      "Ramids",
+      "terisb",
+      "mycom"
+    ],
+    "friends": [
+      {
+        "id": 5,
+        "name": "Smith"
+      },
+      {
+        "id": 8,
+        "name": "Rafi"
+      }
+    ],
+    "favoriteFood": "Bread"
+  }
+]
