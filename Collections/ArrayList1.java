@@ -48,6 +48,8 @@ public class ArrayList1 {
 		a1.removeByNames("Sakil");
 		a1.displayName(listnames);
 		System.out.println("*********");
+		System.out.println("""
+				""");
 		a1.removeByPosition(3);
 		a1.displayName(listnames);
 		System.out.println("*********");
