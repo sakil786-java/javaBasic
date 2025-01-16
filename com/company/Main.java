@@ -6,6 +6,6 @@ public class Main {
 	// write your code here
         System.out.println("Local Changes");
         System.out.println("");
-        System.out.println("Doing for commit");
+
     }
 }
