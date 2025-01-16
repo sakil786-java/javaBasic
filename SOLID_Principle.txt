@@ -1,0 +1,286 @@
+1. Single Responsibility Principle (SRP)
+Definition: A class should have only one responsibility and one reason to change.
+
+Scenario:
+Imagine building a school management system. You need to manage student details and send emails to students.
+
+Bad Design (Violation of SRP):
+
+class StudentManager {
+    public void addStudent(String studentName) {
+        System.out.println("Student added: " + studentName);
+    }
+
+    public void sendEmail(String email) {
+        System.out.println("Email sent to: " + email);
+    }
+}
+Problem:
+
+StudentManager handles both adding students and sending emails, which are unrelated responsibilities.
+Good Design (Following SRP):
+
+
+class StudentManager {
+    public void addStudent(String studentName) {
+        System.out.println("Student added: " + studentName);
+    }
+}
+
+class EmailService {
+    public void sendEmail(String email) {
+        System.out.println("Email sent to: " + email);
+    }
+}
+Benefits:
+
+If the way emails are sent changes (e.g., using a new email provider), only the EmailService class needs modification.
+2. Open/Closed Principle (OCP)
+Definition: Classes should be open for extension but closed for modification.
+
+Scenario:
+You’re designing a payment system that processes credit cards, and later you need to add PayPal payments.
+
+Bad Design (Violation of OCP):
+
+
+class PaymentProcessor {
+    public void processPayment(String type) {
+        if (type.equals("CreditCard")) {
+            System.out.println("Processing credit card payment...");
+        } else if (type.equals("PayPal")) {
+            System.out.println("Processing PayPal payment...");
+        }
+    }
+}
+Problem:
+
+Adding a new payment type (e.g., Google Pay) requires modifying the processPayment method.
+Good Design (Following OCP):
+
+
+interface Payment {
+    void pay();
+}
+
+class CreditCardPayment implements Payment {
+    @Override
+    public void pay() {
+        System.out.println("Processing credit card payment...");
+    }
+}
+
+class PayPalPayment implements Payment {
+    @Override
+    public void pay() {
+        System.out.println("Processing PayPal payment...");
+    }
+}
+
+class PaymentProcessor {
+    public void processPayment(Payment payment) {
+        payment.pay();
+    }
+}
+Usage:
+
+
+PaymentProcessor processor = new PaymentProcessor();
+processor.processPayment(new CreditCardPayment()); // Output: Processing credit card payment...
+processor.processPayment(new PayPalPayment());    // Output: Processing PayPal payment...
+Benefits:
+
+New payment methods can be added by implementing Payment without modifying PaymentProcessor.
+
+
+3. Liskov Substitution Principle (LSP)
+Definition: Subclasses should be replaceable for their parent class without breaking functionality.
+
+Scenario:
+You’re designing a vehicle system where cars and bicycles are vehicles.
+
+Bad Design (Violation of LSP):
+class Vehicle {
+    public void startEngine() {
+        System.out.println("Engine started");
+    }
+}
+
+class Bicycle extends Vehicle {
+    @Override
+    public void startEngine() {
+        throw new UnsupportedOperationException("Bicycles don't have engines!");
+    }
+}
+Problem:
+
+Bicycle violates LSP because it cannot behave like Vehicle.
+Good Design (Following LSP):
+
+
+abstract class Vehicle {
+    public abstract void move();
+}
+
+class Car extends Vehicle {
+    @Override
+    public void move() {
+        System.out.println("Car is moving using its engine.");
+    }
+}
+
+class Bicycle extends Vehicle {
+    @Override
+    public void move() {
+        System.out.println("Bicycle is moving using pedals.");
+    }
+}
+Usage:
+
+Vehicle car = new Car();
+car.move(); // Output: Car is moving using its engine.
+
+Vehicle bicycle = new Bicycle();
+bicycle.move(); // Output: Bicycle is moving using pedals.
+Benefits:
+
+Both Car and Bicycle behave as Vehicle without unexpected behavior.
+4. Interface Segregation Principle (ISP)
+Definition: A class should not be forced to implement methods it does not use.
+
+Scenario:
+You’re designing a worker system with humans and robots.
+
+Bad Design (Violation of ISP):
+
+
+interface Worker {
+    void work();
+    void eat();
+}
+
+class Robot implements Worker {
+    @Override
+    public void work() {
+        System.out.println("Robot working...");
+    }
+
+    @Override
+    public void eat() {
+        throw new UnsupportedOperationException("Robots don't eat!");
+    }
+}
+Problem:
+
+Robots are forced to implement eat(), which they don’t use.
+Good Design (Following ISP):
+
+
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+
+class Human implements Workable, Eatable {
+    @Override
+    public void work() {
+        System.out.println("Human working...");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("Human eating...");
+    }
+}
+
+class Robot implements Workable {
+    @Override
+    public void work() {
+        System.out.println("Robot working...");
+    }
+}
+Benefits:
+
+Humans and robots implement only the methods relevant to them.
+5. Dependency Inversion Principle (DIP)
+Definition: High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+Scenario:
+You’re designing a computer that works with both wired and wireless keyboards.
+
+Bad Design (Violation of DIP):
+
+
+class WiredKeyboard {
+    public void connect() {
+        System.out.println("Wired keyboard connected.");
+    }
+}
+
+class Computer {
+    private WiredKeyboard keyboard;
+
+    public Computer() {
+        keyboard = new WiredKeyboard(); // Direct dependency
+    }
+
+    public void useKeyboard() {
+        keyboard.connect();
+    }
+}
+Problem:
+
+The Computer class directly depends on the WiredKeyboard.
+Good Design (Following DIP):
+
+
+interface Keyboard {
+    void connect();
+}
+
+class WiredKeyboard implements Keyboard {
+    @Override
+    public void connect() {
+        System.out.println("Wired keyboard connected.");
+    }
+}
+
+class WirelessKeyboard implements Keyboard {
+    @Override
+    public void connect() {
+        System.out.println("Wireless keyboard connected.");
+    }
+}
+
+class Computer {
+    private Keyboard keyboard;
+
+    public Computer(Keyboard keyboard) {
+        this.keyboard = keyboard;
+    }
+
+    public void useKeyboard() {
+        keyboard.connect();
+    }
+}
+Usage:
+
+
+Keyboard wiredKeyboard = new WiredKeyboard();
+Keyboard wirelessKeyboard = new WirelessKeyboard();
+
+Computer computer = new Computer(wiredKeyboard);
+computer.useKeyboard(); // Output: Wired keyboard connected.
+
+computer = new Computer(wirelessKeyboard);
+computer.useKeyboard(); // Output: Wireless keyboard connected.
+Benefits:
+
+The Computer depends on the abstraction (Keyboard), making it flexible to work with any type of keyboard.
+How to Explain to the Interviewer
+Briefly describe each principle with its definition.
+Use scenarios and examples to demonstrate bad design and how the principle fixes it.
+Highlight benefits such as maintainability, scalability, and flexibility.
