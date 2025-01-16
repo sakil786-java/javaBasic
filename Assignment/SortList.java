@@ -15,7 +15,7 @@ public class SortList {
         Collections.sort(l3);
         for(String s:l3)
         {
-            System.out.println(s);
+            System.out.println(s+" ");
         }
 
 
